@@ -6,3 +6,6 @@ services:
     buildCommand: pip install -r requirements.txt && python src/generate_sample_data.py && python src/analyze_ecommerce.py
     startCommand: uvicorn src.app:app --host 0.0.0.0 --port $PORT
     autoDeploy: true
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.13.5
