@@ -1,24 +1,24 @@
 # E-commerce Profitability and Retention Analytics
 
-End-to-end portfolio project focused on a real business problem in e-commerce: sales are growing, but net profitability and customer retention are under pressure due to inefficient campaigns, excessive discounts, and high return rates.
+This project was built as a portfolio case around a very common business problem in e-commerce: sales keep moving, but profitability does not improve at the same pace. The goal is not just to report revenue, but to understand what is happening underneath the surface and where the business is losing efficiency.
 
 ## Business context
 
-An e-commerce company sees steady top-line growth, but commercial leaders are concerned that revenue growth is not converting into healthy margin expansion. The business suspects that some customer segments, acquisition channels, and product categories generate sales volume while eroding profitability.
+The scenario is simple and realistic. An e-commerce company is growing, but commercial leaders are starting to worry about margin pressure, high return rates, and too much dependence on discounts. Some channels bring volume but not enough profit. Some categories sell well but come with expensive returns. At the same time, not every acquired customer becomes a repeat buyer.
 
-This project is designed to answer the type of questions a Senior Data Analyst would solve for a commercial, growth, or category management team.
+This project is framed the way a Senior Data Analyst would approach it: starting from the business problem, translating it into measurable questions, and ending with recommendations the company could actually act on.
 
 ## Business questions
 
-1. Which customer segments generate the highest long-term value and which ones are at risk of churn?
-2. Which channels and categories drive revenue but underperform on gross margin and return rate?
-3. What levers could improve retention and profitability in a measurable way?
+1. Which customer segments create the most value over time, and which ones are most likely to stop buying?
+2. Which channels and product categories help revenue grow, but hurt profitability?
+3. What actions could improve retention, reduce waste, and increase net revenue?
 
 ## Tech stack
 
-- `SQL` for business queries and KPI aggregation
-- `Python` for synthetic data generation, data cleaning, EDA, and RFM segmentation
-- `Power BI` or `Tableau` for executive dashboards using the exported CSV outputs
+- `SQL` for KPI calculation and business queries
+- `Python` for data generation, cleaning, exploratory analysis, and RFM segmentation
+- `Power BI` or `Tableau` for dashboarding and stakeholder storytelling
 
 ## Project structure
 
@@ -58,12 +58,12 @@ python src/analyze_ecommerce.py
 
 ## Outputs
 
-After execution, the project generates:
+After running the scripts, the project generates:
 
 - cleaned transaction-level data in `data/processed`
 - KPI summary tables in `outputs/tables`
-- executive-ready charts in `outputs/charts`
-- an RFM segmentation file for downstream dashboarding
+- business charts in `outputs/charts`
+- an RFM segmentation file ready to be consumed in a dashboard
 
 ## Key KPIs included
 
@@ -78,18 +78,13 @@ After execution, the project generates:
 
 ## Strategic value
 
-The resulting analysis supports decisions such as:
+This analysis supports decisions such as:
 
-- reallocating spend toward channels with stronger net margin
-- reducing over-discounting in low-elasticity segments
-- prioritizing retention campaigns for high-value at-risk customers
-- intervening in product categories with abnormal return behavior
+- reallocating spend toward channels with stronger profit contribution
+- reducing aggressive discounting where it is not really needed
+- prioritizing retention actions for high-value customers at risk of churn
+- reviewing product categories with unusually high return behavior
 
-## Portfolio angle
+## Why this works well in a portfolio
 
-This repository is intentionally designed to showcase:
-
-- business framing, not just technical execution
-- quantifiable recommendations connected to revenue and efficiency
-- clean deliverables that can be reused in interviews, GitHub, and dashboards
-
+This is the kind of project that helps in interviews because it shows more than tools. It shows business judgment, prioritization, and the ability to connect data to decisions that affect revenue, margin, and efficiency.
