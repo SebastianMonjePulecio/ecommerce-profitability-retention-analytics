@@ -1,26 +1,27 @@
-# E-commerce Profitability and Retention Analytics
+# Análisis de Rentabilidad y Retención en E-commerce
 
-This project was built as a portfolio case around a very common business problem in e-commerce: sales keep moving, but profitability does not improve at the same pace. The goal is not just to report revenue, but to understand what is happening underneath the surface and where the business is losing efficiency.
+Este proyecto fue construido como un caso de portafolio enfocado en un problema muy común en e-commerce: la empresa vende más, pero la rentabilidad no mejora al mismo ritmo. El objetivo no es solo reportar ventas, sino entender qué está afectando el margen, qué canales realmente aportan valor y dónde se están perdiendo oportunidades de retención.
 
-## Business context
+## Contexto del negocio
 
-The scenario is simple and realistic. An e-commerce company is growing, but commercial leaders are starting to worry about margin pressure, high return rates, and too much dependence on discounts. Some channels bring volume but not enough profit. Some categories sell well but come with expensive returns. At the same time, not every acquired customer becomes a repeat buyer.
+El escenario es realista y fácil de explicar en una entrevista. Una empresa de e-commerce está creciendo, pero el equipo comercial empieza a notar señales de alerta: presión sobre el margen, devoluciones altas y una dependencia excesiva de descuentos para sostener el volumen. Algunos canales traen pedidos, pero no suficiente utilidad. Algunas categorías venden bien, pero generan costos altos por devoluciones. Además, no todos los clientes adquiridos vuelven a comprar.
 
-This project is framed the way a Senior Data Analyst would approach it: starting from the business problem, translating it into measurable questions, and ending with recommendations the company could actually act on.
+La idea del proyecto es abordar el problema como lo haría un Senior Data Analyst: partir del dolor del negocio, traducirlo en preguntas medibles y terminar con recomendaciones accionables.
 
-## Business questions
+## Preguntas de negocio
 
-1. Which customer segments create the most value over time, and which ones are most likely to stop buying?
-2. Which channels and product categories help revenue grow, but hurt profitability?
-3. What actions could improve retention, reduce waste, and increase net revenue?
+1. ¿Qué segmentos de clientes generan más valor en el tiempo y cuáles tienen mayor riesgo de abandono?
+2. ¿Qué canales y categorías ayudan a crecer en ventas, pero perjudican la rentabilidad?
+3. ¿Qué acciones podrían mejorar la retención, reducir ineficiencias y aumentar el ingreso neto?
 
-## Tech stack
+## Stack tecnológico
 
-- `SQL` for KPI calculation and business queries
-- `Python` for data generation, cleaning, exploratory analysis, and RFM segmentation
-- `Power BI` or `Tableau` for dashboarding and stakeholder storytelling
+- `SQL` para consultas de negocio y cálculo de KPIs
+- `Python` para generación de datos, limpieza, análisis exploratorio y segmentación RFM
+- `FastAPI` para exponer resultados en un endpoint y una vista web simple
+- `Power BI` o `Tableau` como siguiente paso para dashboard ejecutivo
 
-## Project structure
+## Estructura del proyecto
 
 ```text
 .
@@ -35,56 +36,66 @@ This project is framed the way a Senior Data Analyst would approach it: starting
 |   `-- schema.sql
 |-- src
 |   |-- analyze_ecommerce.py
+|   |-- app.py
 |   `-- generate_sample_data.py
+|-- templates
+|   `-- index.html
 |-- .gitignore
 |-- README.md
 `-- requirements.txt
 ```
 
-## How to run
+## Cómo ejecutarlo
 
-1. Create a virtual environment.
-2. Install dependencies.
-3. Generate the synthetic dataset.
-4. Run the analysis script.
+1. Instala las dependencias.
+2. Genera el dataset sintético.
+3. Corre el análisis.
+4. Levanta la API para ver los resultados.
 
 ```bash
-python -m venv .venv
-.venv\Scripts\activate
-pip install -r requirements.txt
+python -m pip install -r requirements.txt
 python src/generate_sample_data.py
 python src/analyze_ecommerce.py
+python -m uvicorn src.app:app --reload
 ```
 
-## Outputs
+Cuando el servidor esté arriba, abre:
 
-After running the scripts, the project generates:
+- `http://127.0.0.1:8000/` para ver la vista web
+- `http://127.0.0.1:8000/api/summary` para ver los KPIs
+- `http://127.0.0.1:8000/api/channels` para ver desempeño por canal
+- `http://127.0.0.1:8000/api/categories` para ver desempeño por categoría
+- `http://127.0.0.1:8000/api/rfm` para ver segmentación de clientes
 
-- cleaned transaction-level data in `data/processed`
-- KPI summary tables in `outputs/tables`
-- business charts in `outputs/charts`
-- an RFM segmentation file ready to be consumed in a dashboard
+## Salidas del análisis
 
-## Key KPIs included
+Después de correr los scripts, el proyecto genera:
 
-- net revenue
-- gross profit
-- gross margin percentage
-- average order value
-- repeat purchase rate
-- return rate
-- discount intensity
-- marketing ROAS by channel
+- datos limpios a nivel transaccional en `data/processed`
+- tablas de KPIs en `outputs/tables`
+- gráficos listos para compartir en `outputs/charts`
+- un archivo de segmentación RFM para dashboard o storytelling
 
-## Strategic value
+## KPIs incluidos
 
-This analysis supports decisions such as:
+- ingreso neto
+- utilidad bruta
+- porcentaje de margen bruto
+- ticket promedio
+- tasa de recompra
+- tasa de devoluciones
+- intensidad de descuento
+- ROAS por canal
 
-- reallocating spend toward channels with stronger profit contribution
-- reducing aggressive discounting where it is not really needed
-- prioritizing retention actions for high-value customers at risk of churn
-- reviewing product categories with unusually high return behavior
+## Valor estratégico
 
-## Why this works well in a portfolio
+Este análisis ayuda a tomar decisiones como:
 
-This is the kind of project that helps in interviews because it shows more than tools. It shows business judgment, prioritization, and the ability to connect data to decisions that affect revenue, margin, and efficiency.
+- reasignar inversión hacia canales con mejor aporte a utilidad
+- reducir descuentos agresivos donde no son necesarios
+- priorizar campañas de retención para clientes valiosos en riesgo
+- revisar categorías con comportamiento anormal en devoluciones
+
+## Por qué funciona bien en portafolio
+
+Este proyecto no solo demuestra manejo de herramientas. También muestra criterio de negocio, capacidad para priorizar y habilidad para traducir datos en decisiones que impactan ingresos, margen y eficiencia operativa.

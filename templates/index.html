@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Analítica E-commerce</title>
+    <style>
+        :root {
+            --bg: #f4efe7;
+            --ink: #18230f;
+            --card: #fffaf2;
+            --accent: #6b8a3a;
+            --accent-soft: #dfe8c8;
+            --muted: #5a6650;
+            --border: #d6cfbf;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: Georgia, "Times New Roman", serif;
+            background:
+                radial-gradient(circle at top right, rgba(107, 138, 58, 0.12), transparent 30%),
+                linear-gradient(180deg, #f9f5ee 0%, var(--bg) 100%);
+            color: var(--ink);
+        }
+
+        .wrap {
+            max-width: 1120px;
+            margin: 0 auto;
+            padding: 40px 20px 60px;
+        }
+
+        .hero {
+            padding: 28px;
+            border: 1px solid var(--border);
+            background: rgba(255, 250, 242, 0.88);
+            border-radius: 24px;
+            box-shadow: 0 20px 40px rgba(24, 35, 15, 0.08);
+        }
+
+        .eyebrow {
+            display: inline-block;
+            padding: 6px 12px;
+            border-radius: 999px;
+            background: var(--accent-soft);
+            color: var(--accent);
+            font-size: 13px;
+            letter-spacing: 0.04em;
+            text-transform: uppercase;
+        }
+
+        h1 {
+            margin: 18px 0 12px;
+            font-size: clamp(2.2rem, 6vw, 4rem);
+            line-height: 1.02;
+        }
+
+        .lead {
+            max-width: 720px;
+            font-size: 1.08rem;
+            line-height: 1.7;
+            color: var(--muted);
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 16px;
+            margin-top: 28px;
+        }
+
+        .card {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            padding: 18px;
+        }
+
+        .card h2,
+        .section h2 {
+            margin-top: 0;
+            font-size: 1.1rem;
+        }
+
+        .metric-label {
+            color: var(--muted);
+            font-size: 0.92rem;
+        }
+
+        .metric-value {
+            margin-top: 8px;
+            font-size: 1.9rem;
+            font-weight: bold;
+        }
+
+        .section {
+            margin-top: 28px;
+            padding: 24px;
+            border: 1px solid var(--border);
+            background: rgba(255, 250, 242, 0.9);
+            border-radius: 24px;
+        }
+
+        .insight {
+            padding: 14px 16px;
+            border-left: 4px solid var(--accent);
+            background: #f7f4ed;
+            margin-top: 14px;
+            color: var(--muted);
+            line-height: 1.6;
+        }
+
+        .chart-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 18px;
+            margin-top: 18px;
+        }
+
+        img {
+            width: 100%;
+            height: auto;
+            display: block;
+            border-radius: 18px;
+            border: 1px solid var(--border);
+            background: white;
+        }
+
+        .links {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-top: 18px;
+        }
+
+        a {
+            color: var(--accent);
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .button {
+            padding: 10px 14px;
+            border: 1px solid var(--accent);
+            border-radius: 999px;
+            background: white;
+        }
+
+        @media (max-width: 640px) {
+            .wrap {
+                padding: 22px 14px 40px;
+            }
+
+            .hero,
+            .section {
+                padding: 18px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <main class="wrap">
+        <section class="hero">
+            <span class="eyebrow">Proyecto de portafolio</span>
+            <h1>Rentabilidad y retención en e-commerce</h1>
+            <p class="lead">
+                Este endpoint muestra los resultados principales de un análisis orientado a negocio.
+                La idea fue responder una pregunta muy concreta: qué canales, categorías y segmentos
+                ayudan a crecer de forma rentable y cuáles están generando fricción para el negocio.
+            </p>
+
+            <div class="grid">
+                <article class="card">
+                    <div class="metric-label">Ingreso neto</div>
+                    <div class="metric-value">{{ "{:,.0f}".format(summary.net_revenue) }}</div>
+                </article>
+                <article class="card">
+                    <div class="metric-label">Utilidad bruta</div>
+                    <div class="metric-value">{{ "{:,.0f}".format(summary.gross_profit) }}</div>
+                </article>
+                <article class="card">
+                    <div class="metric-label">Margen bruto</div>
+                    <div class="metric-value">{{ "{:.1f}%".format(summary.gross_margin_pct) }}</div>
+                </article>
+                <article class="card">
+                    <div class="metric-label">ROAS</div>
+                    <div class="metric-value">{{ "{:.2f}".format(summary.roas) }}</div>
+                </article>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2>Lectura ejecutiva</h2>
+            <div class="insight">
+                El canal con mayor utilidad bruta fue <strong>{{ top_channel.acquisition_channel }}</strong>,
+                con una utilidad aproximada de <strong>{{ "{:,.0f}".format(top_channel.gross_profit) }}</strong>.
+                Esto sugiere que no siempre el canal con más volumen es el más conveniente si el objetivo es proteger el margen.
+            </div>
+            <div class="insight">
+                La categoría con mayor tasa de devoluciones fue <strong>{{ top_category_risk.category }}</strong>,
+                con una tasa cercana a <strong>{{ "{:.1f}%".format(top_category_risk.return_rate_pct) }}</strong>.
+                Ese tipo de hallazgo puede justificar una revisión de surtido, logística inversa o calidad del producto.
+            </div>
+
+            <div class="links">
+                <a class="button" href="/api/summary">Ver KPIs en JSON</a>
+                <a class="button" href="/api/channels">Ver canales</a>
+                <a class="button" href="/api/categories">Ver categorías</a>
+                <a class="button" href="/api/rfm">Ver segmentación RFM</a>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2>Visualizaciones</h2>
+            <div class="chart-grid">
+                {% for chart in charts %}
+                <img src="/charts/{{ chart }}" alt="{{ chart }}">
+                {% endfor %}
+            </div>
+        </section>
+    </main>
+</body>
+</html>
