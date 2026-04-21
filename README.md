@@ -1,25 +1,25 @@
-# Análisis de Rentabilidad y Retención en E-commerce
+# Analisis de Rentabilidad y Retencion en E-commerce
 
-Este proyecto fue construido como un caso de portafolio enfocado en un problema muy común en e-commerce: la empresa vende más, pero la rentabilidad no mejora al mismo ritmo. El objetivo no es solo reportar ventas, sino entender qué está afectando el margen, qué canales realmente aportan valor y dónde se están perdiendo oportunidades de retención.
+Este proyecto nace de una situacion bastante comun en e-commerce: la empresa vende mas, pero eso no siempre se traduce en mejor rentabilidad. La idea no fue solo mostrar tecnicas de analisis, sino construir un caso de portafolio que se sienta cercano a un problema real de negocio.
 
 ## Contexto del negocio
 
-El escenario es realista y fácil de explicar en una entrevista. Una empresa de e-commerce está creciendo, pero el equipo comercial empieza a notar señales de alerta: presión sobre el margen, devoluciones altas y una dependencia excesiva de descuentos para sostener el volumen. Algunos canales traen pedidos, pero no suficiente utilidad. Algunas categorías venden bien, pero generan costos altos por devoluciones. Además, no todos los clientes adquiridos vuelven a comprar.
+Una empresa de e-commerce viene creciendo, pero el equipo comercial empieza a notar algunas señales de alerta: margen presionado, devoluciones altas y demasiada dependencia de descuentos para sostener el volumen. Algunos canales traen pedidos, pero no dejan suficiente utilidad. Algunas categorias venden bien, pero generan friccion operativa por devoluciones. Y no todos los clientes que se adquieren vuelven a comprar.
 
-La idea del proyecto es abordar el problema como lo haría un Senior Data Analyst: partir del dolor del negocio, traducirlo en preguntas medibles y terminar con recomendaciones accionables.
+El proyecto esta pensado desde una mirada de analista senior: partir del problema, hacer preguntas utiles y terminar con recomendaciones que podrian defenderse frente a negocio.
 
 ## Preguntas de negocio
 
-1. ¿Qué segmentos de clientes generan más valor en el tiempo y cuáles tienen mayor riesgo de abandono?
-2. ¿Qué canales y categorías ayudan a crecer en ventas, pero perjudican la rentabilidad?
-3. ¿Qué acciones podrían mejorar la retención, reducir ineficiencias y aumentar el ingreso neto?
+1. Que segmentos de clientes generan mas valor y cuales muestran mayor riesgo de abandono?
+2. Que canales y categorias ayudan a crecer en ventas, pero castigan la rentabilidad?
+3. Que decisiones podrian mejorar retencion, eficiencia comercial e ingreso neto?
 
-## Stack tecnológico
+## Stack tecnologico
 
-- `SQL` para consultas de negocio y cálculo de KPIs
-- `Python` para generación de datos, limpieza, análisis exploratorio y segmentación RFM
-- `FastAPI` para exponer resultados en un endpoint y una vista web simple
-- `Power BI` o `Tableau` como siguiente paso para dashboard ejecutivo
+- `SQL` para consultas de negocio y calculo de KPIs
+- `Python` para generacion de datos, limpieza, analisis exploratorio y segmentacion RFM
+- `FastAPI` para exponer resultados en endpoints
+- `Streamlit` para un dashboard visual, mas ejecutivo y facil de mostrar
 
 ## Estructura del proyecto
 
@@ -28,6 +28,8 @@ La idea del proyecto es abordar el problema como lo haría un Senior Data Analys
 |-- data
 |   |-- processed
 |   `-- raw
+|-- notebooks
+|   `-- ecommerce_storytelling_es.ipynb
 |-- outputs
 |   |-- charts
 |   `-- tables
@@ -40,107 +42,94 @@ La idea del proyecto es abordar el problema como lo haría un Senior Data Analys
 |   `-- generate_sample_data.py
 |-- templates
 |   `-- index.html
-|-- .gitignore
-|-- README.md
-`-- requirements.txt
+|-- .streamlit
+|   `-- config.toml
+|-- render.yaml
+|-- requirements.txt
+`-- streamlit_app.py
 ```
 
-## Cómo ejecutarlo
+## Como ejecutarlo
 
-1. Instala las dependencias.
-2. Genera el dataset sintético.
-3. Corre el análisis.
-4. Levanta la API para ver los resultados.
-5. Si quieres una experiencia más visual, levanta el dashboard de Streamlit.
+1. Instala dependencias.
+2. Genera el dataset sintetico.
+3. Corre el analisis.
+4. Levanta la API si quieres revisar endpoints.
+5. Levanta Streamlit si quieres ver la parte mas visual.
 
 ```bash
 python -m pip install -r requirements.txt
 python src/generate_sample_data.py
 python src/analyze_ecommerce.py
+```
+
+Para la API:
+
+```bash
 python -m uvicorn src.app:app --reload
 ```
 
-Para abrir el dashboard de Streamlit:
+Para el dashboard:
 
 ```bash
-streamlit run streamlit_app.py
+python -m streamlit run streamlit_app.py
 ```
 
-Cuando el servidor esté arriba, abre:
+## Rutas utiles
 
-- `http://127.0.0.1:8000/` para ver la vista web
-- `http://127.0.0.1:8000/api/summary` para ver los KPIs
-- `http://127.0.0.1:8000/api/channels` para ver desempeño por canal
-- `http://127.0.0.1:8000/api/categories` para ver desempeño por categoría
-- `http://127.0.0.1:8000/api/rfm` para ver segmentación de clientes
+Si corres la API:
 
-Para Streamlit normalmente se abrirá:
+- `http://127.0.0.1:8000/`
+- `http://127.0.0.1:8000/api/summary`
+- `http://127.0.0.1:8000/api/channels`
+- `http://127.0.0.1:8000/api/categories`
+- `http://127.0.0.1:8000/api/rfm`
+
+Si corres Streamlit:
 
 - `http://localhost:8501`
 
-## Notebook en español
+## Notebook en espanol
 
-También dejé un notebook pensado para portafolio y entrevistas en:
+Tambien deje un notebook pensado para contar la historia del proyecto de forma mas clara:
 
 - `notebooks/ecommerce_storytelling_es.ipynb`
 
-Ese notebook resume el problema, muestra los KPIs principales, interpreta los hallazgos y conecta los resultados con decisiones de negocio. La idea es que te sirva tanto para presentar el proyecto como para explicar tu proceso de análisis.
-
-Para abrirlo, puedes usar Jupyter Notebook, VS Code o Google Colab si prefieres trabajar con una versión exportada.
+Sirve bien para entrevistas porque resume el problema, muestra hallazgos y conecta el analisis con decisiones de negocio sin ponerse demasiado tecnico.
 
 ## Despliegue en Render
 
-El proyecto ya quedó preparado para desplegarse en `Render` con el archivo `render.yaml`.
+El repo ya incluye `render.yaml`, asi que se puede desplegar en Render sin demasiada configuracion manual.
 
-Pasos:
-
-1. Entra a Render y conecta tu cuenta de GitHub.
-2. Crea un nuevo servicio usando el repositorio `ecommerce-profitability-retention-analytics`.
-3. Si Render detecta el `render.yaml`, tomará automáticamente la configuración.
-4. Una vez termine el build, tendrás una URL pública en `onrender.com`.
-
-Configuración usada:
+Configuracion usada:
 
 - Build Command: `pip install -r requirements.txt && python src/generate_sample_data.py && python src/analyze_ecommerce.py`
 - Start Command: `uvicorn src.app:app --host 0.0.0.0 --port $PORT`
 
-Cuando esté desplegado, podrás compartir:
+## Salidas del analisis
 
-- `/` para la vista ejecutiva
-- `/api/summary` para KPIs
-- `/api/channels` para desempeño por canal
-- `/api/categories` para desempeño por categoría
-- `/api/rfm` para segmentación RFM
+Despues de correr los scripts, el proyecto genera:
 
-## Salidas del análisis
-
-Después de correr los scripts, el proyecto genera:
-
-- datos limpios a nivel transaccional en `data/processed`
+- datos limpios en `data/processed`
 - tablas de KPIs en `outputs/tables`
-- gráficos listos para compartir en `outputs/charts`
-- un archivo de segmentación RFM para dashboard o storytelling
+- graficos exportados en `outputs/charts`
+- segmentacion RFM para storytelling y dashboard
 
 ## KPIs incluidos
 
 - ingreso neto
 - utilidad bruta
-- porcentaje de margen bruto
+- margen bruto
 - ticket promedio
 - tasa de recompra
 - tasa de devoluciones
-- intensidad de descuento
+- descuento promedio
 - ROAS por canal
 
-## Valor estratégico
+## Valor del proyecto
 
-Este análisis ayuda a tomar decisiones como:
+Lo que hace fuerte este proyecto no es solo que corre, sino que conecta bien con negocio. Permite hablar de mezcla de canales, calidad del ingreso, devoluciones, eficiencia comercial y retencion de clientes de una forma bastante natural.
 
-- reasignar inversión hacia canales con mejor aporte a utilidad
-- reducir descuentos agresivos donde no son necesarios
-- priorizar campañas de retención para clientes valiosos en riesgo
-- revisar categorías con comportamiento anormal en devoluciones
+## Por que queda mejor asi
 
-## Por qué funciona bien en portafolio
-
-Este proyecto no solo demuestra manejo de herramientas. También muestra criterio de negocio, capacidad para priorizar y habilidad para traducir datos en decisiones que impactan ingresos, margen y eficiencia operativa.
+Decidi dejar el proyecto mas enfocado en lo que ya estaba funcionando mejor: analisis, notebook, API y dashboard en Streamlit. En vez de abrir demasiados frentes, la idea fue dejar una historia mas limpia y creible.
