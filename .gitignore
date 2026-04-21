@@ -1,0 +1,13 @@
+.venv/
+__pycache__/
+*.pyc
+data/raw/*.csv
+data/processed/*.csv
+outputs/charts/*.png
+outputs/tables/*.csv
+
+!data/raw/.gitkeep
+!data/processed/.gitkeep
+!outputs/charts/.gitkeep
+!outputs/tables/.gitkeep
+
