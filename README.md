@@ -67,6 +67,40 @@ Cuando el servidor esté arriba, abre:
 - `http://127.0.0.1:8000/api/categories` para ver desempeño por categoría
 - `http://127.0.0.1:8000/api/rfm` para ver segmentación de clientes
 
+## Notebook en español
+
+También dejé un notebook pensado para portafolio y entrevistas en:
+
+- `notebooks/ecommerce_storytelling_es.ipynb`
+
+Ese notebook resume el problema, muestra los KPIs principales, interpreta los hallazgos y conecta los resultados con decisiones de negocio. La idea es que te sirva tanto para presentar el proyecto como para explicar tu proceso de análisis.
+
+Para abrirlo, puedes usar Jupyter Notebook, VS Code o Google Colab si prefieres trabajar con una versión exportada.
+
+## Despliegue en Render
+
+El proyecto ya quedó preparado para desplegarse en `Render` con el archivo `render.yaml`.
+
+Pasos:
+
+1. Entra a Render y conecta tu cuenta de GitHub.
+2. Crea un nuevo servicio usando el repositorio `ecommerce-profitability-retention-analytics`.
+3. Si Render detecta el `render.yaml`, tomará automáticamente la configuración.
+4. Una vez termine el build, tendrás una URL pública en `onrender.com`.
+
+Configuración usada:
+
+- Build Command: `pip install -r requirements.txt && python src/generate_sample_data.py && python src/analyze_ecommerce.py`
+- Start Command: `uvicorn src.app:app --host 0.0.0.0 --port $PORT`
+
+Cuando esté desplegado, podrás compartir:
+
+- `/` para la vista ejecutiva
+- `/api/summary` para KPIs
+- `/api/channels` para desempeño por canal
+- `/api/categories` para desempeño por categoría
+- `/api/rfm` para segmentación RFM
+
 ## Salidas del análisis
 
 Después de correr los scripts, el proyecto genera:

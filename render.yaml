@@ -1,0 +1,8 @@
+services:
+  - type: web
+    name: ecommerce-profitability-retention-analytics
+    runtime: python
+    plan: free
+    buildCommand: pip install -r requirements.txt && python src/generate_sample_data.py && python src/analyze_ecommerce.py
+    startCommand: uvicorn src.app:app --host 0.0.0.0 --port $PORT
+    autoDeploy: true
