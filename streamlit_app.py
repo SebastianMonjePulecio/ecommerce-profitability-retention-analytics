@@ -266,6 +266,75 @@ if view == "Resumen ejecutivo":
     )
     st.plotly_chart(return_chart, use_container_width=True)
 
+    st.markdown('<div class="section-title">Key takeaways</div>', unsafe_allow_html=True)
+    k1, k2 = st.columns(2)
+    k1.markdown(
+        f"""
+        <div class="insight-card">
+            <strong>Qué está pasando</strong><br><br>
+            El negocio muestra un ingreso neto de <strong>{fmt_currency(summary['net_revenue'])}</strong> con una utilidad bruta de
+            <strong>{fmt_currency(summary['gross_profit'])}</strong>. La lectura no es de crisis comercial, sino de
+            eficiencia: hay crecimiento, pero parte del valor se erosiona por mezcla de canales, descuentos y devoluciones.
+        </div>
+        """,
+        unsafe_allow_html=True,
+    )
+    k2.markdown(
+        f"""
+        <div class="insight-card">
+            <strong>Qué merece atención inmediata</strong><br><br>
+            La tasa de devoluciones de <strong>{fmt_pct(summary['return_rate_pct'])}</strong> y el desempeño desigual por canal
+            sugieren que el siguiente salto no vendrá solo por invertir más, sino por depurar qué ventas realmente dejan margen
+            y cuáles están generando costo operativo.
+        </div>
+        """,
+        unsafe_allow_html=True,
+    )
+
+    q1, q2, q3 = st.columns(3)
+    q1.markdown(
+        """
+        <div class="insight-card">
+            <strong>Quick win</strong><br><br>
+            Reasignar inversión hacia los canales con mejor equilibrio entre utilidad y ROAS puede generar mejora relativamente
+            rápida sin necesidad de cambiar el modelo comercial completo.
+        </div>
+        """,
+        unsafe_allow_html=True,
+    )
+    q2.markdown(
+        """
+        <div class="insight-card">
+            <strong>Riesgo principal</strong><br><br>
+            Seguir premiando volumen sin revisar rentabilidad puede inflar ventas mientras deteriora margen y hace más cara la operación.
+        </div>
+        """,
+        unsafe_allow_html=True,
+    )
+    q3.markdown(
+        """
+        <div class="insight-card">
+            <strong>Decisión sugerida</strong><br><br>
+            La prioridad ejecutiva debería ser ordenar el mix de canales y categorías antes de escalar presupuesto o descuentos.
+        </div>
+        """,
+        unsafe_allow_html=True,
+    )
+
+    st.markdown(
+        """
+        <div class="hero-card" style="margin-top: 1rem;">
+            <div class="section-title">Recomendación ejecutiva</div>
+            <div class="hero-text">
+                La foto general del negocio sugiere una oportunidad clara de mejora en calidad de ingresos. La mejor lectura no es
+                “vender más”, sino “vender mejor”: proteger canales con mejor utilidad, revisar categorías con alta fricción
+                operativa y usar la retención como palanca de rentabilidad, no solo de volumen.
+            </div>
+        </div>
+        """,
+        unsafe_allow_html=True,
+    )
+
 if view == "Canales y categorías":
     st.markdown('<div class="section-title">Desempeño comercial</div>', unsafe_allow_html=True)
     left, right = st.columns((1, 1))
@@ -334,6 +403,81 @@ if view == "Canales y categorías":
         hide_index=True,
     )
 
+    best_channel = channels_df.sort_values("gross_margin_pct", ascending=False).iloc[0]
+    weakest_channel = channels_df.sort_values("gross_margin_pct", ascending=True).iloc[0]
+    highest_return_category = categories_df.sort_values("return_rate_pct", ascending=False).iloc[0]
+    highest_discount_category = categories_df.sort_values("avg_discount_rate_pct", ascending=False).iloc[0]
+
+    st.markdown('<div class="section-title">Insights comerciales</div>', unsafe_allow_html=True)
+    i1, i2 = st.columns(2)
+    i1.markdown(
+        f"""
+        <div class="insight-card">
+            <strong>Hallazgo 1: no todos los canales valen lo mismo</strong><br><br>
+            <strong>{best_channel['acquisition_channel']}</strong> lidera en margen bruto con
+            <strong>{fmt_pct(best_channel['gross_margin_pct'])}</strong>, mientras que
+            <strong>{weakest_channel['acquisition_channel']}</strong> queda más expuesto en eficiencia.
+            Esto sugiere que la mezcla de adquisición debe optimizarse con criterio de utilidad, no solo de volumen.
+        </div>
+        """,
+        unsafe_allow_html=True,
+    )
+    i2.markdown(
+        f"""
+        <div class="insight-card">
+            <strong>Hallazgo 2: las categorías también están presionando el negocio</strong><br><br>
+            <strong>{highest_return_category['category']}</strong> registra la mayor tasa de devolución con
+            <strong>{fmt_pct(highest_return_category['return_rate_pct'])}</strong>, y
+            <strong>{highest_discount_category['category']}</strong> muestra el mayor descuento promedio.
+            Cuando estas dos señales se combinan, suele haber destrucción de margen incluso si la categoría vende bien.
+        </div>
+        """,
+        unsafe_allow_html=True,
+    )
+
+    i3, i4, i5 = st.columns(3)
+    i3.markdown(
+        """
+        <div class="insight-card">
+            <strong>Quick win</strong><br><br>
+            Revisar el presupuesto del canal menos eficiente y mover una parte hacia canales con mejor ROAS y margen puede tener impacto rápido.
+        </div>
+        """,
+        unsafe_allow_html=True,
+    )
+    i4.markdown(
+        """
+        <div class="insight-card">
+            <strong>Riesgo operativo</strong><br><br>
+            Categorías con devoluciones altas pueden esconder problemas de calidad, promesa comercial o experiencia postventa.
+        </div>
+        """,
+        unsafe_allow_html=True,
+    )
+    i5.markdown(
+        """
+        <div class="insight-card">
+            <strong>Decisión sugerida</strong><br><br>
+            Antes de escalar inversión, conviene definir un criterio de priorización que combine utilidad, ROAS, devolución y descuento.
+        </div>
+        """,
+        unsafe_allow_html=True,
+    )
+
+    st.markdown(
+        """
+        <div class="hero-card" style="margin-top: 1rem;">
+            <div class="section-title">Recomendación ejecutiva</div>
+            <div class="hero-text">
+                La conversación comercial debería cambiar de “qué canal vende más” a “qué canal y qué categoría dejan mejor negocio”.
+                La mejor decisión aquí es construir una gestión integrada de adquisición y rentabilidad, donde descuentos, devoluciones
+                y margen sean parte del mismo tablero de control.
+            </div>
+        </div>
+        """,
+        unsafe_allow_html=True,
+    )
+
 if view == "Clientes y retención":
     st.markdown('<div class="section-title">Segmentación y retención</div>', unsafe_allow_html=True)
     segment_mix = (
@@ -341,6 +485,15 @@ if view == "Clientes y retención":
         .value_counts()
         .rename_axis("segment")
         .reset_index(name="customers")
+    )
+    segment_summary = (
+        rfm_df.groupby("segment", as_index=False)
+        .agg(
+            customers=("customer_id", "count"),
+            avg_monetary=("monetary", "mean"),
+            avg_frequency=("frequency", "mean"),
+            avg_recency=("recency", "mean"),
+        )
     )
 
     left, right = st.columns((0.85, 1.15))
@@ -377,18 +530,109 @@ if view == "Clientes y retención":
     champions = int((rfm_df["segment"] == "Champions").sum())
     at_risk = int((rfm_df["segment"] == "At Risk").sum())
     loyal = int((rfm_df["segment"] == "Loyal").sum())
+    potential = int((rfm_df["segment"] == "Potential Loyalist").sum())
+
+    champions_row = segment_summary[segment_summary["segment"] == "Champions"].iloc[0]
+    at_risk_row = segment_summary[segment_summary["segment"] == "At Risk"].iloc[0]
+    loyal_row = segment_summary[segment_summary["segment"] == "Loyal"].iloc[0]
+    potential_row = segment_summary[segment_summary["segment"] == "Potential Loyalist"].iloc[0]
 
     c1, c2, c3 = st.columns(3)
     c1.metric("Clientes Champions", f"{champions:,}")
     c2.metric("Clientes Loyal", f"{loyal:,}")
     c3.metric("Clientes At Risk", f"{at_risk:,}")
 
+    st.markdown('<div class="section-title">Insights y recomendaciones</div>', unsafe_allow_html=True)
+    i1, i2 = st.columns(2)
+    i1.markdown(
+        f"""
+        <div class="insight-card">
+            <strong>Hallazgo 1: el valor está concentrado en los segmentos altos</strong><br><br>
+            Los clientes <strong>Champions</strong> tienen un valor monetario promedio de
+            <strong>{fmt_currency(champions_row['avg_monetary'])}</strong> y una frecuencia media de
+            <strong>{champions_row['avg_frequency']:.1f}</strong> compras. Este grupo debería protegerse con
+            beneficios de fidelización, acceso anticipado o campañas de cross-sell, porque perderlos tendría un impacto
+            desproporcionado en ingreso y recurrencia.
+        </div>
+        """,
+        unsafe_allow_html=True,
+    )
+    i2.markdown(
+        f"""
+        <div class="insight-card">
+            <strong>Hallazgo 2: hay una bolsa relevante de clientes en riesgo</strong><br><br>
+            El segmento <strong>At Risk</strong> reúne <strong>{at_risk:,}</strong> clientes con una recencia promedio de
+            <strong>{at_risk_row['avg_recency']:.0f}</strong> días. No todos justifican el mismo esfuerzo, así que la
+            recomendación es reactivar primero a quienes todavía muestran valor histórico razonable y evitar campañas masivas
+            sobre clientes de baja contribución.
+        </div>
+        """,
+        unsafe_allow_html=True,
+    )
+
+    i3, i4 = st.columns(2)
+    i3.markdown(
+        f"""
+        <div class="insight-card">
+            <strong>Oportunidad 1: convertir potenciales en clientes leales</strong><br><br>
+            Hay <strong>{potential:,}</strong> clientes en <strong>Potential Loyalist</strong>. Este grupo suele ser el más rentable
+            para trabajar porque todavía no está perdido y ya mostró señales de interés. Aquí sirven campañas de segunda y tercera compra,
+            bundles, recomendaciones personalizadas y recordatorios post-compra.
+        </div>
+        """,
+        unsafe_allow_html=True,
+    )
+    i4.markdown(
+        f"""
+        <div class="insight-card">
+            <strong>Oportunidad 2: fidelizar sin sobreinvertir</strong><br><br>
+            El segmento <strong>Loyal</strong> ya muestra una frecuencia media de <strong>{loyal_row['avg_frequency']:.1f}</strong> compras.
+            En vez de empujar descuentos agresivos, la mejor estrategia suele ser aumentar ticket y recompra con beneficios no monetarios,
+            programas VIP o promociones exclusivas por categoría.
+        </div>
+        """,
+        unsafe_allow_html=True,
+    )
+
     st.markdown(
+        f"""
+        <div class="hero-card" style="margin-top: 1rem;">
+            <div class="section-title">Recomendación ejecutiva</div>
+            <div class="hero-text">
+                La estrategia de retención no debería ejecutarse de forma uniforme. Una versión más madura sería dividir la inversión en tres frentes:
+                <strong>proteger Champions</strong>, <strong>escalar Potential Loyalists</strong> y <strong>reactivar At Risk con criterios de valor</strong>.
+                Con esta lógica, el negocio evita gastar de más en segmentos de baja probabilidad de retorno y concentra esfuerzo donde la mejora en ingreso
+                incremental es más defendible.
+            </div>
+        </div>
+        """,
+        unsafe_allow_html=True,
+    )
+
+    p1, p2, p3 = st.columns(3)
+    p1.markdown(
         """
         <div class="insight-card">
-            <strong>Cómo leer esta página</strong><br><br>
-            La retención no debería tratar a todos los clientes igual. Los segmentos con mayor valor y mejor frecuencia
-            merecen acciones de fidelización, mientras que los segmentos en riesgo requieren campañas más tácticas de reactivación.
+            <strong>Quick win</strong><br><br>
+            Activar journeys de segunda y tercera compra sobre clientes con señal de potencial puede mejorar retención sin elevar demasiado CAC.
+        </div>
+        """,
+        unsafe_allow_html=True,
+    )
+    p2.markdown(
+        """
+        <div class="insight-card">
+            <strong>Riesgo principal</strong><br><br>
+            Tratar a toda la base de clientes igual genera desperdicio comercial y normalmente termina sobreincentivando a quienes menos lo necesitan.
+        </div>
+        """,
+        unsafe_allow_html=True,
+    )
+    p3.markdown(
+        """
+        <div class="insight-card">
+            <strong>Decisión sugerida</strong><br><br>
+            La retención debería medirse por uplift incremental por segmento, no solo por aperturas, clics o volumen de campaña.
         </div>
         """,
         unsafe_allow_html=True,
