@@ -58,6 +58,32 @@ def inject_styles() -> None:
             margin: 0.9rem 0 0.5rem 0;
             font-weight: 700;
         }
+        .hero-grid {
+            display: grid;
+            grid-template-columns: 1.2fr 0.8fr;
+            gap: 1rem;
+            margin-top: 1.2rem;
+        }
+        .hero-panel {
+            background: linear-gradient(180deg, rgba(255,255,255,0.82), rgba(247,244,237,0.92));
+            border: 1px solid #d6cfbf;
+            border-radius: 18px;
+            padding: 1rem 1.1rem;
+        }
+        .hero-panel h4 {
+            color: #18230f;
+            margin: 0 0 0.6rem 0;
+            font-size: 1rem;
+        }
+        .hero-panel p, .hero-panel li {
+            color: #4d5845;
+            line-height: 1.6;
+            margin: 0;
+        }
+        .hero-panel ul {
+            padding-left: 1.1rem;
+            margin: 0;
+        }
         .hero-text {
             color: #5a6650;
             font-size: 1rem;
@@ -80,6 +106,28 @@ def inject_styles() -> None:
             margin-top: 0.3rem;
             margin-bottom: 0.3rem;
         }
+        .story-strip {
+            display: grid;
+            grid-template-columns: repeat(4, minmax(0, 1fr));
+            gap: 0.85rem;
+            margin: 1rem 0 1.2rem 0;
+        }
+        .story-chip {
+            background: #fffaf2;
+            border: 1px solid #d6cfbf;
+            border-radius: 18px;
+            padding: 0.9rem 1rem;
+        }
+        .story-chip strong {
+            color: #18230f;
+            display: block;
+            margin-bottom: 0.35rem;
+        }
+        .story-chip span {
+            color: #5a6650;
+            line-height: 1.5;
+            font-size: 0.93rem;
+        }
         div[data-testid="stMetric"] {
             background: #fffaf2;
             border: 1px solid #d6cfbf;
@@ -91,6 +139,11 @@ def inject_styles() -> None:
         }
         div[data-testid="stMetricValue"] {
             color: #18230f;
+        }
+        @media (max-width: 960px) {
+            .hero-grid, .story-strip {
+                grid-template-columns: 1fr;
+            }
         }
         </style>
         """,
@@ -157,6 +210,47 @@ st.markdown(
             categorías y segmentos ayudan a crecer con rentabilidad y cuáles están generando
             fricción en margen, devoluciones y eficiencia de inversión.
         </div>
+        <div class="hero-grid">
+            <div class="hero-panel">
+                <h4>Qué estoy tratando de responder</h4>
+                <p>
+                    Si el negocio ya vende, pero no captura todo el valor que podría, entonces el foco deja de ser
+                    solo adquisición. La conversación pasa a calidad de ingresos, eficiencia comercial y retención.
+                </p>
+            </div>
+            <div class="hero-panel">
+                <h4>Lo que quiero que se vea aquí</h4>
+                <ul>
+                    <li>qué canal deja mejor negocio</li>
+                    <li>dónde las devoluciones castigan el margen</li>
+                    <li>qué clientes conviene proteger o reactivar</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    """,
+    unsafe_allow_html=True,
+)
+
+st.markdown(
+    """
+    <div class="story-strip">
+        <div class="story-chip">
+            <strong>Problema</strong>
+            <span>El volumen crece, pero no toda venta deja el mismo valor para el negocio.</span>
+        </div>
+        <div class="story-chip">
+            <strong>Lectura</strong>
+            <span>Canales, categorias y segmentos tienen pesos muy distintos en margen y recurrencia.</span>
+        </div>
+        <div class="story-chip">
+            <strong>Riesgo</strong>
+            <span>Seguir empujando ventas sin depurar mezcla comercial puede inflar ingreso y debilitar utilidad.</span>
+        </div>
+        <div class="story-chip">
+            <strong>Decision</strong>
+            <span>La mejor palanca no siempre es vender mas, sino vender mejor y retener con criterio.</span>
+        </div>
     </div>
     """,
     unsafe_allow_html=True,
@@ -164,10 +258,16 @@ st.markdown(
 
 with st.sidebar:
     st.markdown("## Foco del dashboard")
+    available_views = ["Resumen ejecutivo", "Canales y categorías", "Clientes y retención"]
+    query_view = st.query_params.get("view", "Resumen ejecutivo")
+    if query_view not in available_views:
+        query_view = "Resumen ejecutivo"
     view = st.radio(
         "Selecciona la vista",
-        ["Resumen ejecutivo", "Canales y categorías", "Clientes y retención"],
+        available_views,
+        index=available_views.index(query_view),
     )
+    st.query_params["view"] = view
     st.markdown("## KPIs rápidos")
     st.write(f"Ingreso neto: {fmt_currency(summary['net_revenue'])}")
     st.write(f"Utilidad bruta: {fmt_currency(summary['gross_profit'])}")

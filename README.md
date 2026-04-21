@@ -35,6 +35,12 @@ Para aterrizarla mejor, trabaje sobre tres preguntas:
 - `Streamlit`
 - `Plotly`
 
+## Vista del dashboard
+
+Asi se ve la app hoy:
+
+![Dashboard principal](assets/screenshots/streamlit-resumen.png)
+
 ## Estructura
 
 ```text
