@@ -51,12 +51,19 @@ La idea del proyecto es abordar el problema como lo haría un Senior Data Analys
 2. Genera el dataset sintético.
 3. Corre el análisis.
 4. Levanta la API para ver los resultados.
+5. Si quieres una experiencia más visual, levanta el dashboard de Streamlit.
 
 ```bash
 python -m pip install -r requirements.txt
 python src/generate_sample_data.py
 python src/analyze_ecommerce.py
 python -m uvicorn src.app:app --reload
+```
+
+Para abrir el dashboard de Streamlit:
+
+```bash
+streamlit run streamlit_app.py
 ```
 
 Cuando el servidor esté arriba, abre:
@@ -66,6 +73,10 @@ Cuando el servidor esté arriba, abre:
 - `http://127.0.0.1:8000/api/channels` para ver desempeño por canal
 - `http://127.0.0.1:8000/api/categories` para ver desempeño por categoría
 - `http://127.0.0.1:8000/api/rfm` para ver segmentación de clientes
+
+Para Streamlit normalmente se abrirá:
+
+- `http://localhost:8501`
 
 ## Notebook en español
 
