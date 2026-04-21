@@ -1,0 +1,49 @@
+{
+  "name": "Ecommerce Executive Theme",
+  "background": "#F4EFE7",
+  "foreground": "#18230F",
+  "tableAccent": "#6B8A3A",
+  "dataColors": [
+    "#6B8A3A",
+    "#C97C2C",
+    "#1F4E5F",
+    "#A64032",
+    "#9D8C5A",
+    "#3F6C51"
+  ],
+  "visualStyles": {
+    "*": {
+      "*": {
+        "title": [
+          {
+            "show": true,
+            "fontSize": 14,
+            "fontFamily": "Georgia",
+            "color": { "solid": { "color": "#18230F" } }
+          }
+        ],
+        "labels": [
+          {
+            "color": { "solid": { "color": "#18230F" } },
+            "fontSize": 11,
+            "fontFamily": "Georgia"
+          }
+        ],
+        "background": [
+          {
+            "show": true,
+            "color": { "solid": { "color": "#FFFAF2" } },
+            "transparency": 0
+          }
+        ],
+        "border": [
+          {
+            "show": true,
+            "color": { "solid": { "color": "#D6CFBF" } },
+            "radius": 12
+          }
+        ]
+      }
+    }
+  }
+}

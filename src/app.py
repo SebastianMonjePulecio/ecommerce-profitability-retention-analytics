@@ -42,16 +42,32 @@ def home(request: Request):
     summary_df = load_table("executive_summary.csv")
     channel_df = load_table("channel_performance.csv")
     category_df = load_table("category_performance.csv")
+    rfm_df = load_table("rfm_segments.csv")
 
     summary = dict(zip(summary_df["metric"], summary_df["value"]))
     top_channel = channel_df.sort_values("gross_profit", ascending=False).iloc[0].to_dict()
     top_category_risk = category_df.sort_values("return_rate_pct", ascending=False).iloc[0].to_dict()
+    worst_roas_channel = channel_df.sort_values("roas", ascending=True).iloc[0].to_dict()
+    best_margin_category = category_df.sort_values("gross_margin_pct", ascending=False).iloc[0].to_dict()
+    segment_mix = (
+        rfm_df["segment"]
+        .value_counts()
+        .rename_axis("segment")
+        .reset_index(name="customers")
+        .sort_values("customers", ascending=False)
+        .to_dict(orient="records")
+    )
 
     context = {
         "request": request,
         "summary": summary,
         "top_channel": top_channel,
         "top_category_risk": top_category_risk,
+        "worst_roas_channel": worst_roas_channel,
+        "best_margin_category": best_margin_category,
+        "top_channels": channel_df.sort_values("gross_profit", ascending=False).head(5).to_dict(orient="records"),
+        "category_table": category_df.sort_values("return_rate_pct", ascending=False).to_dict(orient="records"),
+        "segment_mix": segment_mix,
         "charts": [
             "gross_profit_by_channel.png",
             "return_rate_by_category.png",
