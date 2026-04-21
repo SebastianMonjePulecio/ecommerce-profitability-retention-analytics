@@ -2,7 +2,7 @@
 
 Este proyecto lo arme pensando en el tipo de caso que de verdad me gustaria conversar en una entrevista. No queria hacer solo un analisis bonito o una coleccion de graficos. Queria trabajar sobre una situacion de negocio que se siente real: una empresa vende mas, pero no necesariamente gana mejor.
 
-En muchos equipos de e-commerce pasa algo parecido. El volumen crece, pero el margen sigue bajo presion. Algunas campañas traen pedidos, aunque no siempre dejan buena utilidad. Algunas categorias parecen fuertes en ventas, pero generan demasiadas devoluciones. Y no todos los clientes que se adquieren terminan convirtiendose en clientes recurrentes.
+En muchos equipos de e-commerce pasa algo parecido. El volumen crece, pero el margen sigue bajo presion. Algunas campanas traen pedidos, aunque no siempre dejan buena utilidad. Algunas categorias parecen fuertes en ventas, pero generan demasiadas devoluciones. Y no todos los clientes que se adquieren terminan convirtiendose en clientes recurrentes.
 
 La idea de este proyecto fue bajar ese problema a datos y responderlo con una mirada de negocio, no solo tecnica.
 
@@ -24,7 +24,7 @@ Para aterrizarla mejor, trabaje sobre tres preguntas:
 - una API en FastAPI para exponer resultados
 - una vista web simple
 - un dashboard en Streamlit con lectura ejecutiva, insights y recomendaciones
-- un notebook en español para contar mejor la historia del analisis
+- un notebook en espanol para contar mejor la historia del analisis
 
 ## Stack
 
@@ -120,7 +120,7 @@ Despues de correr el analisis, el proyecto deja:
 
 Mas que responder "cuanto se vendio", este proyecto ayuda a conversar cosas como:
 
-- si el crecimiento viene acompañado de buena rentabilidad o no
+- si el crecimiento viene acompanado de buena rentabilidad o no
 - que canales estan sosteniendo mejor el negocio
 - donde los descuentos o las devoluciones se comen el margen
 - que clientes conviene proteger, escalar o reactivar

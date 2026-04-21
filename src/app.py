@@ -16,8 +16,8 @@ TEMPLATES_DIR = BASE_DIR / "templates"
 
 
 app = FastAPI(
-    title="API de Analítica E-commerce",
-    description="Expone los principales resultados del proyecto de rentabilidad y retención en e-commerce.",
+    title="API de Analitica E-commerce",
+    description="Expone los principales resultados del proyecto de rentabilidad y retencion en e-commerce.",
     version="1.0.0",
 )
 app.mount("/charts", StaticFiles(directory=CHARTS_DIR), name="charts")
@@ -30,7 +30,7 @@ def load_table(filename: str) -> pd.DataFrame:
         raise HTTPException(
             status_code=404,
             detail=(
-                f"No se encontró {filename}. Ejecuta primero "
+                f"No se encontro {filename}. Ejecuta primero "
                 "src/generate_sample_data.py y src/analyze_ecommerce.py."
             ),
         )

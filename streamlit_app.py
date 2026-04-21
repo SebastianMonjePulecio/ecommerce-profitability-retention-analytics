@@ -13,7 +13,7 @@ TABLES_DIR = BASE_DIR / "outputs" / "tables"
 
 st.set_page_config(
     page_title="Dashboard Ejecutivo E-commerce",
-    page_icon="📈",
+    page_icon="chart",
     layout="wide",
     initial_sidebar_state="expanded",
 )
@@ -436,7 +436,7 @@ if view == "Resumen ejecutivo":
         <div class="hero-card" style="margin-top: 1rem;">
             <div class="section-title">Recomendacion ejecutiva</div>
             <div class="hero-text">
-                La lectura mas util aqui no es “hay que vender mas”, sino “hay que vender mejor”. Antes de buscar mas volumen,
+                La lectura mas util aqui no es "hay que vender mas", sino "hay que vender mejor". Antes de buscar mas volumen,
                 tiene mas sentido proteger los canales que ya estan dejando buena utilidad, revisar las categorias con mas friccion
                 y usar retencion como palanca de rentabilidad, no solo de volumen.
             </div>
@@ -598,8 +598,8 @@ if view == "Canales y categorias":
         <div class="hero-card" style="margin-top: 1rem;">
             <div class="section-title">Recomendacion ejecutiva</div>
             <div class="hero-text">
-                La conversacion comercial cambiaria bastante si en vez de preguntar “que canal vende mas” empezaramos a preguntar
-                “que canal y que categoria dejan mejor negocio”. Ahi es donde descuentos, devoluciones y margen dejan de verse por separado
+                La conversacion comercial cambiaria bastante si en vez de preguntar "que canal vende mas" empezaramos a preguntar
+                "que canal y que categoria dejan mejor negocio". Ahi es donde descuentos, devoluciones y margen dejan de verse por separado
                 y pasan a formar parte de la misma decision.
             </div>
         </div>
@@ -776,7 +776,7 @@ if view == "Clientes y retencion":
         """
         <div class="insight-card">
             <strong>Decision sugerida</strong><br><br>
-            Yo mediría retencion por uplift incremental por segmento, no solo por aperturas, clics o volumen de campana.
+            Yo mediria retencion por uplift incremental por segmento, no solo por aperturas, clics o volumen de campana.
         </div>
         """,
         unsafe_allow_html=True,

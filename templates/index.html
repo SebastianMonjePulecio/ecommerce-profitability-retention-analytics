@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Analítica E-commerce</title>
+    <title>Analitica E-commerce</title>
     <style>
         :root {
             --bg: #f4efe7;
@@ -231,11 +231,11 @@
     <main class="wrap">
         <section class="hero">
             <span class="eyebrow">Proyecto de portafolio</span>
-            <h1>Rentabilidad y retención en e-commerce</h1>
+            <h1>Rentabilidad y retencion en e-commerce</h1>
             <p class="lead">
-                Este endpoint muestra los resultados principales de un análisis orientado a negocio.
-                La idea fue responder una pregunta muy concreta: qué canales, categorías y segmentos
-                ayudan a crecer de forma rentable y cuáles están generando fricción para el negocio.
+                Este endpoint muestra los resultados principales de un analisis orientado a negocio.
+                La idea fue responder una pregunta muy concreta: que canales, categorias y segmentos
+                ayudan a crecer de forma rentable y cuales estan generando friccion para el negocio.
             </p>
 
             <div class="grid">
@@ -269,36 +269,36 @@
         <section class="section">
             <div class="section-head">
                 <h2>Lectura ejecutiva</h2>
-                <span class="muted">Vista pensada para decisiones comerciales y de retención</span>
+                <span class="muted">Vista pensada para decisiones comerciales y de retencion</span>
             </div>
             <div class="insight">
                 El canal con mayor utilidad bruta fue <strong>{{ top_channel.acquisition_channel }}</strong>,
                 con una utilidad aproximada de <strong>{{ "{:,.0f}".format(top_channel.gross_profit) }}</strong>.
-                Esto sugiere que no siempre el canal con más volumen es el más conveniente si el objetivo es proteger el margen.
+                Esto sugiere que no siempre el canal con mas volumen es el mas conveniente si el objetivo es proteger el margen.
             </div>
             <div class="insight">
-                La categoría con mayor tasa de devoluciones fue <strong>{{ top_category_risk.category }}</strong>,
+                La categoria con mayor tasa de devoluciones fue <strong>{{ top_category_risk.category }}</strong>,
                 con una tasa cercana a <strong>{{ "{:.1f}%".format(top_category_risk.return_rate_pct) }}</strong>.
-                Ese tipo de hallazgo puede justificar una revisión de surtido, logística inversa o calidad del producto.
+                Ese tipo de hallazgo puede justificar una revision de surtido, logistica inversa o calidad del producto.
             </div>
             <div class="insight">
                 El canal con peor ROAS fue <strong>{{ worst_roas_channel.acquisition_channel }}</strong>, mientras que la
-                categoría con mejor margen fue <strong>{{ best_margin_category.category }}</strong>. Esto permite balancear
+                categoria con mejor margen fue <strong>{{ best_margin_category.category }}</strong>. Esto permite balancear
                 decisiones de crecimiento con decisiones de eficiencia.
             </div>
 
             <div class="links">
                 <a class="button" href="/api/summary">Ver KPIs en JSON</a>
                 <a class="button" href="/api/channels">Ver canales</a>
-                <a class="button" href="/api/categories">Ver categorías</a>
-                <a class="button" href="/api/rfm">Ver segmentación RFM</a>
+                <a class="button" href="/api/categories">Ver categorias</a>
+                <a class="button" href="/api/rfm">Ver segmentacion RFM</a>
             </div>
         </section>
 
         <section class="section">
             <div class="section-head">
                 <h2>Visualizaciones</h2>
-                <span class="muted">Gráficos exportados desde el análisis en Python</span>
+                <span class="muted">Graficos exportados desde el analisis en Python</span>
             </div>
             <div class="chart-grid">
                 {% for chart in charts %}
@@ -309,8 +309,8 @@
 
         <section class="section">
             <div class="section-head">
-                <h2>Canales y categorías</h2>
-                <span class="muted">Resumen rápido para priorizar acciones</span>
+                <h2>Canales y categorias</h2>
+                <span class="muted">Resumen rapido para priorizar acciones</span>
             </div>
             <div class="two-col">
                 <div class="mini-card">
@@ -344,12 +344,12 @@
                 </div>
             </div>
             <div class="mini-card" style="margin-top: 18px;">
-                <h2>Categorías con mayor riesgo operativo</h2>
+                <h2>Categorias con mayor riesgo operativo</h2>
                 <table>
                     <thead>
                         <tr>
-                            <th>Categoría</th>
-                            <th>Tasa devolución</th>
+                            <th>Categoria</th>
+                            <th>Tasa devolucion</th>
                             <th>Margen</th>
                             <th>Ingreso neto</th>
                         </tr>
