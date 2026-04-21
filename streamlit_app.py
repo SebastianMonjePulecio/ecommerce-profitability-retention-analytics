@@ -268,11 +268,12 @@ with st.sidebar:
         index=available_views.index(query_view),
     )
     st.query_params["view"] = view
-    st.markdown("## KPIs rápidos")
-    st.write(f"Ingreso neto: {fmt_currency(summary['net_revenue'])}")
-    st.write(f"Utilidad bruta: {fmt_currency(summary['gross_profit'])}")
-    st.write(f"Margen bruto: {fmt_pct(summary['gross_margin_pct'])}")
-    st.write(f"ROAS: {summary['roas']:.2f}")
+    st.markdown("## Dónde actuar primero")
+    st.markdown(f"**Canal más rentable**  \n{top_channel['acquisition_channel']}")
+    st.markdown(f"**Canal a revisar**  \n{worst_channel['acquisition_channel']}")
+    st.markdown(f"**Categoría crítica**  \n{top_category['category']}")
+    st.markdown("**Segmento a proteger**  \nChampions")
+    st.markdown("**Movimiento recomendado**  \nOrdenar mix comercial y retención antes de escalar inversión.")
 
 
 col1, col2, col3, col4 = st.columns(4)
