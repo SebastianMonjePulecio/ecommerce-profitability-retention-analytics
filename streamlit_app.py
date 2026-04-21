@@ -130,6 +130,15 @@ def fmt_pct(value: float) -> str:
     return f"{value:.1f}%"
 
 
+def impact_card(title: str, body: str) -> str:
+    return f"""
+    <div class="insight-card">
+        <strong>{title}</strong><br><br>
+        {body}
+    </div>
+    """
+
+
 inject_styles()
 summary_df, channels_df, categories_df, rfm_df, monthly_df = load_data()
 summary = metric_lookup(summary_df)
@@ -335,6 +344,25 @@ if view == "Resumen ejecutivo":
         unsafe_allow_html=True,
     )
 
+    estimated_margin_gain = summary["net_revenue"] * 0.02
+    estimated_returns_recovery = summary["net_revenue"] * 0.015
+    st.markdown('<div class="section-title">Impacto estimado</div>', unsafe_allow_html=True)
+    e1, e2 = st.columns(2)
+    e1.markdown(
+        impact_card(
+            "Escenario 1: mejora de margen",
+            f"Si una revision de mix comercial y descuentos ayudara a mejorar el margen bruto en 2 puntos sobre el ingreso actual, el negocio podria capturar alrededor de <strong>{fmt_currency(estimated_margin_gain)}</strong> adicionales."
+        ),
+        unsafe_allow_html=True,
+    )
+    e2.markdown(
+        impact_card(
+            "Escenario 2: menor friccion operativa",
+            f"Si una parte de las devoluciones se redujera via mejoras en categorias criticas, la recuperacion potencial podria rondar <strong>{fmt_currency(estimated_returns_recovery)}</strong> entre ingreso preservado y menor presion operativa."
+        ),
+        unsafe_allow_html=True,
+    )
+
 if view == "Canales y categorías":
     st.markdown('<div class="section-title">Desempeño comercial</div>', unsafe_allow_html=True)
     left, right = st.columns((1, 1))
@@ -475,6 +503,25 @@ if view == "Canales y categorías":
             </div>
         </div>
         """,
+        unsafe_allow_html=True,
+    )
+
+    spend_shift_impact = worst_channel["spend"] * 0.10 if "spend" in worst_channel else 0
+    category_efficiency_impact = highest_return_category["net_revenue"] * 0.03
+    st.markdown('<div class="section-title">Impacto estimado</div>', unsafe_allow_html=True)
+    p1, p2 = st.columns(2)
+    p1.markdown(
+        impact_card(
+            "Escenario 1: reasignacion de inversion",
+            f"Si el negocio moviera solo 10% del presupuesto del canal menos eficiente hacia canales con mejor retorno, ya habria espacio para reordenar aproximadamente <strong>{fmt_currency(spend_shift_impact)}</strong> con mejor criterio de rentabilidad."
+        ),
+        unsafe_allow_html=True,
+    )
+    p2.markdown(
+        impact_card(
+            "Escenario 2: correccion en categoria critica",
+            f"Si se atacara la categoria con mayor devolucion y se mejorara su eficiencia en torno a 3% de su ingreso neto, el impacto defensivo podria acercarse a <strong>{fmt_currency(category_efficiency_impact)}</strong>."
+        ),
         unsafe_allow_html=True,
     )
 
@@ -635,5 +682,24 @@ if view == "Clientes y retención":
             La retención debería medirse por uplift incremental por segmento, no solo por aperturas, clics o volumen de campaña.
         </div>
         """,
+        unsafe_allow_html=True,
+    )
+
+    protected_champions_impact = champions_row["avg_monetary"] * max(champions * 0.05, 1)
+    recovered_at_risk_impact = at_risk_row["avg_monetary"] * max(at_risk * 0.03, 1)
+    st.markdown('<div class="section-title">Impacto estimado</div>', unsafe_allow_html=True)
+    r1, r2 = st.columns(2)
+    r1.markdown(
+        impact_card(
+            "Escenario 1: proteger clientes top",
+            f"Si una estrategia de fidelizacion evitara la perdida de solo 5% de los clientes Champions, el ingreso protegido podria rondar <strong>{fmt_currency(protected_champions_impact)}</strong>."
+        ),
+        unsafe_allow_html=True,
+    )
+    r2.markdown(
+        impact_card(
+            "Escenario 2: reactivar parte del riesgo",
+            f"Si una campaña bien segmentada lograra recuperar 3% del valor potencial de clientes At Risk, el efecto estimado podria estar cerca de <strong>{fmt_currency(recovered_at_risk_impact)}</strong>."
+        ),
         unsafe_allow_html=True,
     )
